@@ -1,0 +1,8 @@
+sensor1 Tue May 01 10:24:55 ICT 2018 305.4 65.0
+sensor1 Tue May 01 10:24:56 ICT 2018 305.4 65.0
+sensor1 Tue May 01 10:24:59 ICT 2018 305.3 65.0
+sensor1 Tue May 01 10:25:01 ICT 2018 305.3 65.0
+sensor1 Tue May 01 10:25:02 ICT 2018 305.4 65.0
+sensor1 Tue May 01 10:25:04 ICT 2018 305.4 65.0
+sensor1 Tue May 01 10:25:07 ICT 2018 305.3 65.0
+sensor1 Tue May 01 10:25:08 ICT 2018 305.3 65.0
