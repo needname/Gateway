@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Gateway:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Gateway_jar</output-path>
+    <root id="archive" name="Gateway.jar">
+      <element id="module-output" name="Gateway" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/common-lib_1.0.0.jar" path-in-jar="/" />
+      <element id="library" level="project" name="common-lib_SNAPSHOT" />
+    </root>
+  </artifact>
+</component>
