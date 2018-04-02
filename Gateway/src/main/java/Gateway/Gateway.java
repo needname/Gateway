@@ -8,11 +8,11 @@ public class Gateway{
 
     static String fileName1 = "data1.txt";
     static String fileName2 = "data2.txt";
-    static int id = -1;
+    static String id = "no_id";
 
     static long time = 5;
     static InetAddress IP;
-    static boolean connect = false;
+    static int port = 10000;
 /*
     public static void main(String args[]) throws Exception {
 

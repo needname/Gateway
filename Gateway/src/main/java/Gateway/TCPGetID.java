@@ -8,13 +8,13 @@ import java.util.StringTokenizer;
 
 public class TCPGetID implements Runnable {
 
-    InetAddress host;
+    private InetAddress host;
 
-    int port;
+    private int port;
 
-    String requestID = "REQUEST_GATEWAY";
+    private String requestID = "REGISTER_GATEWAY";
 
-    String messRev;
+    public static String messRev;
 
     TCPGetID(InetAddress host, int port){
         this.host = host;
@@ -36,19 +36,20 @@ public class TCPGetID implements Runnable {
             }
             Scanner scanner = new Scanner(inFromServer);
             messRev = scanner.nextLine();
+            Gateway.id = messRev;
             //System.out.println("FROM SERVER: " + messRev);
 
-            StringTokenizer itr = new StringTokenizer(messRev);
-            if(itr.hasMoreTokens()){
-                if(itr.nextToken().equals("REQUEST_GATEWAY")) {
-                    Gateway.id = Integer.parseInt(itr.nextToken());
-                    System.out.println(Gateway.id);
-                }
-                else{
-                    Gateway.id = -1;
-                    System.out.println("FROM SERVER: " + messRev);
-                }
-            }
+            //StringTokenizer itr = new StringTokenizer(messRev);
+            //if(itr.hasMoreTokens()){
+             //   if(itr.nextToken().equals("REGISTER_GATEWAY")) {
+             //       Gateway.id = itr.nextToken();
+             //       System.out.println(Gateway.id);
+             //   }
+             //   else{
+             //       Gateway.id = "no_id";
+             //       System.out.println("FROM SERVER: " + messRev);
+             //   }
+            //}
             getID.close();
 
         }

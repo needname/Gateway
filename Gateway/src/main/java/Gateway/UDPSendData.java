@@ -9,11 +9,11 @@ import java.net.InetAddress;
 public class UDPSendData implements Runnable {
 
     private final static int PACKETSIZE = 100;
-    InetAddress host;
-    int port;
-    FileReader fr = null;
-    BufferedReader br = null;
-    String fileName = null;
+    private InetAddress host;
+    private int port;
+    private FileReader fr = null;
+    private BufferedReader br = null;
+    private String fileName = null;
     UDPSendData(InetAddress host, int port, String fileName){
         this.host = host;
         this.port = port;

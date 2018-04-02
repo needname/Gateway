@@ -5,7 +5,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.PrintWriter;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
 public class GatewayForm {
@@ -14,8 +13,8 @@ public class GatewayForm {
     private JTextField ipHost;
     private JTextField time2send;
     private JLabel status;
-    private JTextField a10000TextField;
-    private JLabel port;
+    private JTextField port;
+    private JLabel portLabel;
 
     public GatewayForm() {
         connectButton.addMouseListener(new MouseAdapter() {
@@ -25,12 +24,17 @@ public class GatewayForm {
                 //System.out.println("connected");
                 if(e.getButton() != 0){
                     Gateway.time = Integer.parseInt(time2send.getText());
+                    Gateway.port = Integer.parseInt(port.getText());
                     try{
                         Gateway.IP = InetAddress.getByName(ipHost.getText());
-                        new Thread(new TCPGetID(Gateway.IP,10000)).start();
+                        Thread tcp =  new Thread(new TCPGetID(Gateway.IP, Gateway.port));
+                        tcp.start();
+                        tcp.join();
+                        System.out.println(Gateway.id);
+                        if(!Gateway.id.equals("no_id")){
 
-                        if(Gateway.id == -1){
-                            status.setText("Connected to " + Gateway.IP.toString());
+                            status.setText("Connected to " + Gateway.IP.toString() + " , id of gateway is: " + Gateway.id);
+                            System.out.println("connected");
                             PrintWriter writer1 = new PrintWriter(Gateway.fileName1);
                             writer1.print("");
                             writer1.close();
@@ -57,7 +61,7 @@ public class GatewayForm {
                             }
                         }
                         else {
-                            status.setText("Couldn't connect to server");
+                            status.setText(TCPGetID.messRev);
                         }
                     }
                     catch(Exception e1){
