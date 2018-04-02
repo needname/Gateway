@@ -35,8 +35,7 @@ public class TCPGetID implements Runnable {
                 //System.out.print(".");
             }
             Scanner scanner = new Scanner(inFromServer);
-            //messRev = scanner.nextLine();
-            messRev = "REQUEST_GATEWAY 1234";
+            messRev = scanner.nextLine();
             //System.out.println("FROM SERVER: " + messRev);
 
             StringTokenizer itr = new StringTokenizer(messRev);
@@ -47,6 +46,7 @@ public class TCPGetID implements Runnable {
                 }
                 else{
                     Gateway.id = -1;
+                    System.out.println("FROM SERVER: " + messRev);
                 }
             }
             getID.close();

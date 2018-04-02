@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.Socket;
 
 public class UDPSendData implements Runnable {
 
@@ -14,29 +13,31 @@ public class UDPSendData implements Runnable {
     int port;
     FileReader fr = null;
     BufferedReader br = null;
-
-    UDPSendData(InetAddress host, int port){
+    String fileName = null;
+    UDPSendData(InetAddress host, int port, String fileName){
         this.host = host;
         this.port = port;
+        this.fileName = fileName;
     }
 
     @Override
     public void run() {
-
         DatagramSocket sendSocket = null;
         try{
             sendSocket = new DatagramSocket();
-            fr = new FileReader(Gateway.fileName);
+            fr = new FileReader(fileName);
             br = new BufferedReader(fr);
-            String sCurrentLine;
-            String buffer = "";
+            String sCurrentLine = "";
+            String dataToServer = "";
             while((sCurrentLine = br.readLine()) != null){
-                buffer.concat(sCurrentLine+'\n');
-                System.out.println(sCurrentLine);
-            }
-            byte[] data = buffer.getBytes();
 
-            DatagramPacket packet = new DatagramPacket(data, data.length, host, port);
+                dataToServer = "SET " + Gateway.id + " " + sCurrentLine + fileName;
+                byte[] data = dataToServer.getBytes();
+                DatagramPacket packet = new DatagramPacket(data, data.length, host, port);
+                sendSocket.send(packet);
+                //System.out.println(dataToServer);
+            }
+
             //sendSocket.send(packet);
             if(br != null)
                 br.close();
@@ -44,7 +45,6 @@ public class UDPSendData implements Runnable {
                 fr.close();
         }
         catch(Exception e){
-            System.out.println(".");
             System.out.println(e);
         }
         finally {

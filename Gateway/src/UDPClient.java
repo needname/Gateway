@@ -1,4 +1,5 @@
 import java.net.*;
+import java.util.concurrent.TimeUnit;
 
 public class UDPClient
 {
@@ -12,8 +13,12 @@ public class UDPClient
             int port = 8080;
 
             socket = new DatagramSocket();
+            int i = 0;
             while(true) {
-                byte[] data = "sensor2 Sun Apr  1 00:46:00 2018 30.1 80.0".getBytes();
+                i = i + 1;
+                String name = "sensor1 1 4 2018 24:30:10 31.0 " + i;
+                TimeUnit.SECONDS.sleep(1);
+                byte[] data = name.getBytes();
 
                 DatagramPacket packet = new DatagramPacket(data, data.length, host, port);
 
