@@ -37,7 +37,7 @@ public class TCPGetID implements Runnable {
             Scanner scanner = new Scanner(inFromServer);
             messRev = scanner.nextLine();
             Gateway.id = messRev;
-            //System.out.println("FROM SERVER: " + messRev);
+            System.out.println("FROM SERVER: " + host.toString());
 
             //StringTokenizer itr = new StringTokenizer(messRev);
             //if(itr.hasMoreTokens()){

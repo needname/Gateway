@@ -58,7 +58,7 @@ public class UDPListening implements Runnable
                     second = Integer.parseInt(itr2.nextToken());
 
                     temperature = Float.parseFloat(itr.nextToken());
-                    humidity = Float.parseFloat(itr.nextToken());
+                    humidity = Float.parseFloat(itr.nextToken())/10000;
 
                     if((temperature == -1 && humidity == -1) || year != 2018){}
                     else {
@@ -67,7 +67,7 @@ public class UDPListening implements Runnable
                         Date date = mydate.getTime();
                         FullInformationRecord record = new FullInformationRecord(id, temperature, humidity, date);
                         String rw = record.toRecord() + "\n";
-                        System.out.print(rw);
+                        //System.out.print(rw);
                         byte[] strToBytes = rw.getBytes();
                         outputStream.write(strToBytes);
                         outputStream.flush();

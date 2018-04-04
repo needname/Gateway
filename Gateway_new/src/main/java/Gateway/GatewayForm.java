@@ -16,6 +16,9 @@ public class GatewayForm {
     private JLabel status;
     private JTextField port;
     private JLabel portLabel;
+    private JLabel IPHostLabel;
+    private JLabel timeToSendDataLabel;
+    private JLabel statusLabel;
 
     public GatewayForm() {
         connectButton.addMouseListener(new MouseAdapter() {
@@ -49,7 +52,7 @@ public class GatewayForm {
 
                                     while (true) {
                                         TimeUnit.SECONDS.sleep(Gateway.time);
-                                        new Thread(new UDPSendData(Gateway.IP, 2000, fileName)).start();
+                                        new Thread(new UDPSendData(Gateway.IP, Gateway.port, fileName)).start();
                                         if (fileName == Gateway.fileName1) {
                                             fileName = Gateway.fileName2;
 

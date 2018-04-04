@@ -31,11 +31,19 @@ public class UDPSendData implements Runnable {
             String dataToServer = "";
             while((sCurrentLine = br.readLine()) != null){
 
-                dataToServer = "SET " + Gateway.id + " " + sCurrentLine + fileName;
+                dataToServer = "SET " + Gateway.id + " " + sCurrentLine;
                 byte[] data = dataToServer.getBytes();
                 DatagramPacket packet = new DatagramPacket(data, data.length, host, port);
+                System.out.println(host.toString());
+                System.out.println(port);
+
                 sendSocket.send(packet);
-                //System.out.println(dataToServer);
+                sendSocket.setSoTimeout(5000);
+                System.out.println(dataToServer);
+                packet.setData(new byte[PACKETSIZE]);
+                sendSocket.receive(packet);
+                //System.out.println(new String(packet.getData()));
+
             }
 
             //sendSocket.send(packet);
